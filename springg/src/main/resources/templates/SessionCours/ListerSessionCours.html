@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template" xmlns:x-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.11/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.11/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js" integrity="sha256-J37ZtjEw94oWBNZ9w/XC73raGXE9t10//XHJfKz2QCM=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        var sessionCours=/*[[${sessionCours}]]*/[]
+        console.log(sessionCours)
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                initialView: 'timeGridWeek',
+                locale:"fr",
+                timeZone:'Afrique/Senegal',
+
+                headerToolbar: {
+                    start: 'dayGridMonth,timeGridWeek,timeGridDay custom1',
+                    center: 'title',
+                    end: 'custom2 prevYear,prev,next,nextYear'
+                },
+                footerToolbar: {
+                    start: 'custom1,custom2',
+                    center: '',
+                    end: 'prev,next'
+                },
+
+                customButtons: {
+                    custom1: {
+                        text: 'custom 1',
+                        click: function() {
+                            alert('clicked custom button 1!');
+                        }
+                    },
+                    custom2: {
+                        text: 'custom 2',
+                        click: function() {
+                            alert('clicked custom button 2!');
+                        }
+                    }},
+                editable: false,
+                eventLimit: true,
+                events: sessionCours,
+
+            });
+
+            calendar.render();
+        });
+
+    </script>
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="w-90 ">
+            <form method="get" th:action="@{/admin/cours}"  class="p-10 bg-white rounded shadow-xl inline-flex ">
+                <div  class="inline-flex  w-full  m-2">
+                    <label for="date1" class="block text-sm text-gray-600">Date : </label>
+                    <input type="date" th:value="${date}" name="date" id="date1"  class="w-40 px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                </div>
+
+                <div  class="inline-flex  w-full m-2">
+                    <label for="date1" class="block text-sm text-gray-600">Module: </label>
+                    <input type="text" th:value="${module}" name="module" id="module"  class="w-40 px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                </div>
+                <div  class="inline-flex  w-full  m-2">
+                    <label for="date1" class="block text-sm text-gray-600">Professeur: </label>
+                    <input type="text" th:value="${professeur}" name="professeur" id="professeur"  class="w-40 px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                </div>
+                <button type="submit" class="px-3 py-1   ml-10 text-white bg-blue-600 border border-1 border-blue-600 rounded hover:bg-white hover:text-blue-600">Rechercher</button>
+
+            </form>
+
+
+        </div>
+            <div id='calendar' ></div>
+
+    </div>
+</body>
+</html>
