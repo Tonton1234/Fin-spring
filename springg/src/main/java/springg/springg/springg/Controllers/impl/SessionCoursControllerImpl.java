@@ -39,8 +39,10 @@ public class SessionCoursControllerImpl implements SessionCoursController {
     @Override
     public String listerCours(Model model, int page, int size, String date, String module,String professeur) throws ParseException {
         List<SessionCours> sessions =sessionCoursService.getAll();
+        System.out.println(module);
         if ((date != null && !date.equals("")) || module!=null || professeur!=null){
             if (module!=null){
+                System.out.println(moduleService.findByLibelle(module));
                 sessions=sessionCoursService.getAllByModule(moduleService.findByLibelle(module));
             }
             if (professeur!=null){
@@ -63,14 +65,23 @@ public class SessionCoursControllerImpl implements SessionCoursController {
     }
 
     @Override
+    public String home(Model model, int page, int size) throws ParseException {
+        return "Home/home";
+    }
+
+    @Override
     public String Cours(Model model, int page, int size, String date, String module,String professeur) throws ParseException {
         List<SessionCours> sessionCoursList =sessionCoursService.getAll();
         List<Module> modules=moduleService.findAllByActive();
         Page<SessionCours> sessions = null;
-        System.out.println(module);
+
         if ((date != null && !date.equals("")) || module!=null || professeur!=null){
             if (module!=null){
-                sessions=sessionCoursService.getAllByModule(moduleService.findByLibelle(module),PageRequest.of(page,size));
+                System.out.println(module);
+                System.out.println("ok");
+                Module modu=moduleService.findByLibelle(module);
+                System.out.println(sessionCoursService.getAllByModule(modu,PageRequest.of(page,size)));
+                sessions=sessionCoursService.getAllByModule(modu,PageRequest.of(page,size));
             }
             if (professeur!=null){
                 System.out.println(professeurService.findByNom(professeur));
@@ -88,6 +99,7 @@ public class SessionCoursControllerImpl implements SessionCoursController {
         }
 
         Page<SessionResponseDto> sessionCoursDtos= sessions.map(SessionResponseDto::toDto);
+        System.out.println(sessionCoursDtos);
         model.addAttribute("modules",modules);
         model.addAttribute("cours",sessionCoursDtos.getContent());
         model.addAttribute("pages",new int[sessionCoursDtos.getTotalPages()]);

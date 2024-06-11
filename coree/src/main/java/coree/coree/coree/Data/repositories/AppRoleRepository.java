@@ -9,5 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface AppRoleRepository extends JpaRepository<AppRole,Long> {
     AppRole findAllById(int i);
     AppRole findByRoleName(String role);
+    AppRole getByRoleName(String roleName);
+
     Page<AppRole> findByActiveTrue(Pageable pageable);
 }

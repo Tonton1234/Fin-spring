@@ -18,8 +18,8 @@ public interface SessionCoursRepository extends JpaRepository<SessionCours,Long>
     Page<SessionCours> getByEtat(EtatSessionCours etatSessionCours, Pageable pageable);
     Page<SessionCours> findByActiveTrue(Pageable pageable);
     Page<SessionCours> findByCoursIdAndAndActiveTrue (Long id,Pageable pageable);
-    Page<SessionCours> findAllByProfesseur(Professeur professeur, Pageable pageable);
-    List<SessionCours> findAllByProfesseur(AppUser professeur);
+    Page<SessionCours> findAllByProfesseurAndActiveTrue(Professeur professeur, Pageable pageable);
+    List<SessionCours> findAllByProfesseurAndActiveTrue(AppUser professeur);
     Page<SessionCours> getByModule(Module module, Pageable pageable);
 
     Page<SessionCours> findAllByActiveTrueAndDate(LocalDate date, Pageable pageable);

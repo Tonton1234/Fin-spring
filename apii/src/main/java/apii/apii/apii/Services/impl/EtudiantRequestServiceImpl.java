@@ -74,6 +74,7 @@ public class EtudiantRequestServiceImpl implements EtudiantRequestService {
                 etudiant.setNom(nom);
                 etudiant.setMatricule(matricule);
                 etudiant.setTuteur(tuteur);
+                etudiant.setMontype("ETUDIANT");
                 etudiant.setUsername(login);
                 etudiant.setPassword(passwordEncoder.encode("passer"));
                 // Ajout du rôle à l'étudiant créer à partir de chaque ligne du fichier excel

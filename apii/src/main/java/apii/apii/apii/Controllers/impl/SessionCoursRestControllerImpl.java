@@ -67,6 +67,7 @@ public class SessionCoursRestControllerImpl implements SessionCoursRestControlle
 
     @Override
     public ResponseEntity<Map<Object, Object>> annulerSessionsByCours(Long id, int page, int size) {
+        System.out.println("jkesbfj");
         SessionCours sessionCourss=sessionCoursService.getById(id);
         sessionCourss.setActive(false);
         System.out.println(sessionCourss);

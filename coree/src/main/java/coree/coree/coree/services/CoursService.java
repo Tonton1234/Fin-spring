@@ -3,6 +3,7 @@ package coree.coree.coree.services;
 import coree.coree.coree.Data.Enum.EtatCours;
 import coree.coree.coree.Data.entities.Classe;
 import coree.coree.coree.Data.entities.Cours;
+import coree.coree.coree.Data.entities.Professeur;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,5 +12,7 @@ public interface CoursService extends Service<Cours,Long>{
     Cours getById(Long ig);
     Page<Cours> getAllCoursByActiveTrueAndEncours(Pageable pageable);
     Page<Cours> getAllCoursByActiveTrueAndTerminer(Pageable pageable);
+
+    Page<Cours> getAllCoursByActiveTrueAndProfesseur(Professeur professeur, Pageable pageable);
 
 }

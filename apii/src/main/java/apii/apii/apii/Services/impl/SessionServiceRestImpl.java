@@ -31,7 +31,7 @@ public class SessionServiceRestImpl implements SessionServiceRest {
     private final CoursRepository coursRepository;
     private final SallesCoursRepository sallesCoursRepository;
     private final SessionCoursRepository sessionCoursRepository;
-
+    public Boolean ok=null;
     @Override
     public void add(SessionResquestDto dto) {
         Cours cours=coursRepository.findCoursById(dto.getCours());
@@ -69,12 +69,43 @@ public class SessionServiceRestImpl implements SessionServiceRest {
         sessionCours.setActive(true);
         sessionCours.setSallescours(salle);
         sessionCours.setLieu(lieu);
+
         sessionCours.setLibelle(libelle);
-        if (!((int) hourDifference>cours.getNbreHeureRestant()) ){
-            cours.setNbreHeurePlanifier((int) hourDifference + cours.getNbreHeurePlanifier());
-            cours.setNbreHeureRestant(cours.getNbreHeureRestant()-(int) hourDifference);
-            coursRepository.save(cours);
-            sessionCoursRepository.save(sessionCours);
+        ok=true;
+        if (!((int) hourDifference>cours.getNbreHeureRestant()  ||(heureDebut).isAfter( LocalTime.of(17, 0)) ||
+                heureDebut.isBefore( LocalTime.of(7, 0))
+                ||(heureFin).isAfter( LocalTime.of(20, 0)) ||
+                heureFin.isBefore( LocalTime.of(10, 0)) )){
+            sessionCoursRepository.findAllByProfesseurAndActiveTrue(professeur).forEach(element -> {
+                LocalTime.of(17, 0);
+               if ( element.getDate().compareTo(date)==0){
+                   System.out.println(element.getDate());
+                   System.out.println(date);
+                   LocalTime.of(17, 0);
+                   if ((heureDebut.isAfter(element.getHeureDebut()) && heureDebut.isBefore(element.getHeureFin()))
+                           || (heureFin).isAfter(element.getHeureDebut())  && heureFin.isBefore(element.getHeureFin())
+                           ||(heureFin).isAfter(element.getHeureDebut())  && heureDebut.isBefore(element.getHeureDebut())
+
+
+                   ){
+                       ok=false;
+                       System.out.println("IMPOSSIBLE DE CREER");
+                       System.out.println("IMPOSSIBLE DE CREER");
+                       System.out.println("IMPOSSIBLE DE CREER");
+                       System.out.println("IMPOSSIBLE DE CREER");
+                   }else {
+                     
+                   }
+               }
+            });
+            if (ok){
+                cours.setNbreHeurePlanifier(cours.getNbreHeurePlanifier()+(int) hourDifference);
+                cours.setNbreHeureRestant(cours.getNbreHeureRestant()-(int) hourDifference);
+                sessionCoursRepository.save(sessionCours);
+                coursRepository.save(cours);
+                System.out.println(ok);
+            }
+
         }
 
     }

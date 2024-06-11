@@ -18,6 +18,14 @@ public class AppRole extends AbstractEntity {
     protected String roleName;
     @ManyToMany(mappedBy = "roles")
     List<AppUser> users;
+
+    @Override
+    public String toString() {
+        return "AppRole{" +
+                "roleName='" + roleName + '\'' +
+                '}';
+    }
+
     public AppRole(String roleName) {
         this.roleName = roleName;
     }

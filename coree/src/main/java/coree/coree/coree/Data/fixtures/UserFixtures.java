@@ -23,10 +23,12 @@ public class UserFixtures implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<AppRole> role=new ArrayList<>();
-        role.add(appRoleRepository.findAllById(5));
+
+
         //List<AppUser> user=new ArrayList<>();
         // user.add((AppUser)role.get(0).getUsers());
-        for (int i = 1; i < 3; i++) {
+        for (int i = 4; i < 5; i++) {
+            role.add(appRoleRepository.findAllById(i));
             AppUser ac =new AppUser();
             ac.setNom("nom"+i);
             ac.setPassword(passwordEncoder.encode("passer"));

@@ -2,6 +2,7 @@ package coree.coree.coree.services.Impl;
 
 import coree.coree.coree.Data.Enum.EtatCours;
 import coree.coree.coree.Data.entities.Cours;
+import coree.coree.coree.Data.entities.Professeur;
 import coree.coree.coree.Data.repositories.CoursRepository;
 import coree.coree.coree.services.CoursService;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +50,11 @@ public class CoursServiceImpl implements CoursService {
     @Override
     public Page<Cours> getAllCoursByActiveTrueAndTerminer(Pageable pageable) {
         return  coursRepository.findCoursByEtatAndActiveTrue(EtatCours.Terminer,pageable);
+    }
+
+    @Override
+    public Page<Cours> getAllCoursByActiveTrueAndProfesseur(Professeur prof, Pageable pageable) {
+        return coursRepository.findCoursByProfesseurAndActiveTrue(prof,pageable);
     }
 
 

@@ -3,6 +3,7 @@ package coree.coree.coree.Data.repositories;
 import coree.coree.coree.Data.entities.Classe;
 import coree.coree.coree.Data.entities.Cours;
 import coree.coree.coree.Data.Enum.EtatCours;
+import coree.coree.coree.Data.entities.Professeur;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +17,9 @@ public interface CoursRepository extends JpaRepository<Cours,Long> {
     Cours findCoursById(Long id);
     Page<Cours> findCoursByActiveTrue(Pageable pageable);
     Page<Cours> findCoursByEtatAndActiveTrue (EtatCours plan,Pageable pageable);
+    Page<Cours> findCoursByEtatAndProfesseurAndActiveTrue (EtatCours plan,Professeur professeur,Pageable pageable);
 
+    Page<Cours> findCoursByProfesseurAndActiveTrue (Professeur plan, Pageable pageable);
  /*
     @Query("SELECT c from Cours c JOIN c.professeur p WHERE p.id = :profId")
     List<Cours> getByProfesseurId(@Param("profId") Long profId);

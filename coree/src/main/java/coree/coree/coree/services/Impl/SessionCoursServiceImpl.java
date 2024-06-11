@@ -66,12 +66,12 @@ public class SessionCoursServiceImpl implements SessionCoursService {
 
     @Override
     public Page<SessionCours> getAllByProfesseur(Professeur prof, Pageable pageable) {
-        return sessionCoursRepository.findAllByProfesseur(prof,pageable);
+        return sessionCoursRepository.findAllByProfesseurAndActiveTrue(prof,pageable);
     }
 
     @Override
     public List<SessionCours> getAllByProfesseur(AppUser prof) {
-        return sessionCoursRepository.findAllByProfesseur(prof);
+        return sessionCoursRepository.findAllByProfesseurAndActiveTrue(prof);
     }
 
     @Override

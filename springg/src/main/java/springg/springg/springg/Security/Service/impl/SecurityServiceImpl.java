@@ -53,7 +53,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser user=appUserRepository.findByUsername(username);
+      AppUser user=appUserRepository.findByUsername(username);
         System.out.println(username);
         System.out.println(user);
         if(user ==null)throw new RuntimeException("User not exist");

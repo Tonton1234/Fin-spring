@@ -17,7 +17,12 @@ public interface SessionCoursController {
                        @RequestParam(required = false) String module,
                        @RequestParam(required = false) String professeur
                              ) throws ParseException;
+    @GetMapping(value = "/admin/home")
+    String home(Model model,
+                       @RequestParam(defaultValue = "0")int page,
+                       @RequestParam(defaultValue = "6")int size
 
+    ) throws ParseException;
     @GetMapping(value = "/admin/liste_cours")
     String Cours(Model model,
                        @RequestParam(defaultValue = "0")int page,

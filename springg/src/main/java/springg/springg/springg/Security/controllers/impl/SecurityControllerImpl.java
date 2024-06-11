@@ -15,14 +15,13 @@ public class SecurityControllerImpl implements SecurityController {
     private  final SecurityService securityService;
     @Override
     public String login(@AuthenticationPrincipal UserDetails userDetails) {
-        if (userDetails.getAuthorities().stream().anyMatch(role->role.getAuthority().compareTo("ADMIN")==0)){
-            return "redirect:/admin/cours";
+        if (userDetails.getAuthorities().stream().anyMatch(role->role.getAuthority().compareTo("AC")==0)
+        || userDetails.getAuthorities().stream().anyMatch(role->role.getAuthority().compareTo("RP")==0)
+        || userDetails.getAuthorities().stream().anyMatch(role->role.getAuthority().compareTo("ADMIN")==0)){
+            return "redirect:/admin/home";
         }
 
-        if (userDetails.getAuthorities().stream().anyMatch(role->role.getAuthority().compareTo("AC")==0)){
-            AppUser user =  securityService.getUserByLogin(userDetails.getUsername());
-            return "redirect:/admin/emmargement"+user.getId();
-        }
+
 
         return "redirect:/login";
     }

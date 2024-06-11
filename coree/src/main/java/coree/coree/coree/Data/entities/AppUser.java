@@ -16,13 +16,13 @@ import java.util.Objects;
 @NoArgsConstructor
 @Setter
 @Getter
-
 @Data
 public class AppUser extends AbstractEntity{
 
     @Column(nullable = false)
     protected String nom;
-
+    @Column(nullable = true)
+    protected String montype;
     @Column(nullable = false)
     protected String prenom;
 
@@ -52,6 +52,10 @@ public class AppUser extends AbstractEntity{
 
     public AppUser(Boolean active, String username, String password) {
         super(active);
+        this.username = username;
+        this.password = password;
+    }
+    public AppUser(String username, String password) {
         this.username = username;
         this.password = password;
     }

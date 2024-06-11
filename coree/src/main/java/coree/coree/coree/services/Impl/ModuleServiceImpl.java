@@ -37,7 +37,9 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public Module findByLibelle(String libelle) {
+        System.out.println(moduleRepository.findModuleByLibelle(libelle));
         return moduleRepository.findModuleByLibelle(libelle);
+
     }
 
     @Override

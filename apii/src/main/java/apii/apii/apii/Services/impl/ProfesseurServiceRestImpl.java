@@ -16,6 +16,7 @@ public class ProfesseurServiceRestImpl implements ProfesseurServiceRest {
     @Override
     public void add(ProfesseurRequestDto dto) {
         Professeur professeur=dto.toEntity();
+        professeur.setMontype("PROFESSEUR");
         professeur.setPassword(passwordEncoder.encode("passer"));
         professeur.setActive(true);
         professeurRepository.save(professeur);
