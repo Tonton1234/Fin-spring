@@ -71,6 +71,7 @@ public class SessionCoursRestControllerImpl implements SessionCoursRestControlle
         SessionCours sessionCourss=sessionCoursService.getById(id);
         sessionCourss.setActive(false);
         System.out.println(sessionCourss);
+
         sessionCoursService.save(sessionCourss);
         Page<SessionCours> sessionCours=sessionCoursService.getAllByActiveTrue (PageRequest.of(page,size));
         Page<SessionResponseDto> dataDto = sessionCours.map(SessionResponseDto::toDto);
